@@ -1,0 +1,21 @@
+2019-04-28 17:08:16,139 Evaluation process is started.
+python "D:\opt\neural_network_console_140\libs\nnabla\python\src\nnabla\utils\cli\cli.py" forward
+	-c "D:\tmp\ai\sampleRecursion\sample2_lstm\sample.files\20190428_165115\results.nnp"
+	-d "D:\tmp\ai\sampleRecursion\sample2_lstm\dataset\test.csv"
+	-o "D:\tmp\ai\sampleRecursion\sample2_lstm\sample.files\20190428_165115"
+2019-04-28 17:08:24,387 [nnabla]: data 30 / 400
+2019-04-28 17:08:24,603 [nnabla]: data 60 / 400
+2019-04-28 17:08:24,827 [nnabla]: data 90 / 400
+2019-04-28 17:08:25,084 [nnabla]: data 120 / 400
+2019-04-28 17:08:25,308 [nnabla]: data 150 / 400
+2019-04-28 17:08:25,535 [nnabla]: data 180 / 400
+2019-04-28 17:08:25,761 [nnabla]: data 210 / 400
+2019-04-28 17:08:25,986 [nnabla]: data 240 / 400
+2019-04-28 17:08:26,211 [nnabla]: data 270 / 400
+2019-04-28 17:08:26,440 [nnabla]: data 300 / 400
+2019-04-28 17:08:26,780 [nnabla]: data 330 / 400
+2019-04-28 17:08:27,169 [nnabla]: data 360 / 400
+2019-04-28 17:08:27,429 [nnabla]: data 390 / 400
+2019-04-28 17:08:27,650 [nnabla]: data 400 / 400
+2019-04-28 17:08:27,651 [nnabla]: Forward Completed.
+NNabla command line interface (Version 1.0.10, Build 181128093938)

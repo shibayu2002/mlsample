@@ -1,0 +1,57 @@
+2019-04-28 15:41:42,465 Evaluation process is started.
+python "D:\opt\neural_network_console_140\libs\nnabla\python\src\nnabla\utils\cli\cli.py" forward
+	-c "D:\tmp\ai\sampleRecursion\sample1_non-lstm\sample_model.files\20190428_154106\results.nnp"
+	-d "D:\tmp\ai\sampleRecursion\sample1_non-lstm\dataset\test.csv"
+	-o "D:\tmp\ai\sampleRecursion\sample1_non-lstm\sample_model.files\20190428_154106"
+2019-04-28 15:41:43,743 [nnabla]: data 20 / 1000
+2019-04-28 15:41:43,746 [nnabla]: data 40 / 1000
+2019-04-28 15:41:43,749 [nnabla]: data 60 / 1000
+2019-04-28 15:41:43,755 [nnabla]: data 80 / 1000
+2019-04-28 15:41:43,759 [nnabla]: data 100 / 1000
+2019-04-28 15:41:43,764 [nnabla]: data 120 / 1000
+2019-04-28 15:41:43,769 [nnabla]: data 140 / 1000
+2019-04-28 15:41:43,773 [nnabla]: data 160 / 1000
+2019-04-28 15:41:43,777 [nnabla]: data 180 / 1000
+2019-04-28 15:41:43,781 [nnabla]: data 200 / 1000
+2019-04-28 15:41:43,786 [nnabla]: data 220 / 1000
+2019-04-28 15:41:43,789 [nnabla]: data 240 / 1000
+2019-04-28 15:41:43,794 [nnabla]: data 260 / 1000
+2019-04-28 15:41:43,799 [nnabla]: data 280 / 1000
+2019-04-28 15:41:43,805 [nnabla]: data 300 / 1000
+2019-04-28 15:41:43,810 [nnabla]: data 320 / 1000
+2019-04-28 15:41:43,814 [nnabla]: data 340 / 1000
+2019-04-28 15:41:43,821 [nnabla]: data 360 / 1000
+2019-04-28 15:41:43,826 [nnabla]: data 380 / 1000
+2019-04-28 15:41:43,833 [nnabla]: data 400 / 1000
+2019-04-28 15:41:43,839 [nnabla]: data 420 / 1000
+2019-04-28 15:41:43,850 [nnabla]: data 440 / 1000
+2019-04-28 15:41:43,857 [nnabla]: data 460 / 1000
+2019-04-28 15:41:43,861 [nnabla]: data 480 / 1000
+2019-04-28 15:41:43,865 [nnabla]: data 500 / 1000
+2019-04-28 15:41:43,872 [nnabla]: data 520 / 1000
+2019-04-28 15:41:43,877 [nnabla]: data 540 / 1000
+2019-04-28 15:41:43,881 [nnabla]: data 560 / 1000
+2019-04-28 15:41:43,887 [nnabla]: data 580 / 1000
+2019-04-28 15:41:43,894 [nnabla]: data 600 / 1000
+2019-04-28 15:41:43,900 [nnabla]: data 620 / 1000
+2019-04-28 15:41:43,906 [nnabla]: data 640 / 1000
+2019-04-28 15:41:43,911 [nnabla]: data 660 / 1000
+2019-04-28 15:41:43,917 [nnabla]: data 680 / 1000
+2019-04-28 15:41:43,922 [nnabla]: data 700 / 1000
+2019-04-28 15:41:43,927 [nnabla]: data 720 / 1000
+2019-04-28 15:41:43,931 [nnabla]: data 740 / 1000
+2019-04-28 15:41:43,936 [nnabla]: data 760 / 1000
+2019-04-28 15:41:43,942 [nnabla]: data 780 / 1000
+2019-04-28 15:41:43,946 [nnabla]: data 800 / 1000
+2019-04-28 15:41:43,954 [nnabla]: data 820 / 1000
+2019-04-28 15:41:43,959 [nnabla]: data 840 / 1000
+2019-04-28 15:41:43,964 [nnabla]: data 860 / 1000
+2019-04-28 15:41:43,972 [nnabla]: data 880 / 1000
+2019-04-28 15:41:43,977 [nnabla]: data 900 / 1000
+2019-04-28 15:41:43,981 [nnabla]: data 920 / 1000
+2019-04-28 15:41:43,991 [nnabla]: data 940 / 1000
+2019-04-28 15:41:43,995 [nnabla]: data 960 / 1000
+2019-04-28 15:41:44,005 [nnabla]: data 980 / 1000
+2019-04-28 15:41:44,010 [nnabla]: data 1000 / 1000
+2019-04-28 15:41:44,011 [nnabla]: Forward Completed.
+NNabla command line interface (Version 1.0.10, Build 181128093938)

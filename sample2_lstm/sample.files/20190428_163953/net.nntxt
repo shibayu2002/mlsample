@@ -1,0 +1,1490 @@
+global_config {
+  default_context {
+    array_class: "CpuCachedArray"
+    backends: "cpu:float"
+  }
+}
+training_config {
+  max_epoch: 100
+  iter_per_epoch: 6
+  save_best: true
+  monitor_interval: 10
+}
+network {
+  name: "Main"
+  batch_size: 30
+  repeat_info {
+    id: "LSTM/RecurrentInput"
+    times: 600
+  }
+  variable {
+    name: "Input"
+    type: "Buffer"
+    shape: { dim:-1 dim: 600 dim: 2 }
+  }
+  variable {
+    name: "LSTM/C_Initial"
+    type: "Buffer"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/H_Initial"
+    type: "Buffer"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Affine/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/Affine/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/IGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/IGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/FGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/FGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/OGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/OGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "Affine/affine/W"
+    type: "Parameter"
+    shape: { dim: 60000 dim: 1 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "Affine/affine/b"
+    type: "Parameter"
+    shape: { dim: 1 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "SquaredError_T"
+    type: "Buffer"
+    shape: { dim:-1 dim: 1 }
+  }
+  variable {
+    name: "LSTM/RecurrentInput"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 2 }
+  }
+  variable {
+    name: "LSTM/C"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/H"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Concatenate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 102 }
+  }
+  variable {
+    name: "LSTM/Affine"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/IGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/FGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/OGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Tanh"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid_4"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Add2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Tanh_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2_3"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/RecurrentOutput"
+    type: "Buffer"
+    shape: { dim:-1 dim: 600 dim: 100 }
+  }
+  variable {
+    name: "Affine"
+    type: "Buffer"
+    shape: { dim:-1 dim: 1 }
+  }
+  variable {
+    name: "SquaredError"
+    type: "Buffer"
+    shape: { dim:-1 dim: 1 }
+  }
+  function {
+    name: "LSTM/RecurrentInput"
+    type: "RecurrentInput"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "Input"
+    output: "LSTM/RecurrentInput"
+    recurrent_param {
+      axis: 1
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/C"
+    type: "Delay"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Add2"
+    input: "LSTM/C_Initial"
+    output: "LSTM/C"
+    recurrent_param {
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/H"
+    type: "Delay"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Mul2_3"
+    input: "LSTM/H_Initial"
+    output: "LSTM/H"
+    recurrent_param {
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/Concatenate"
+    type: "Concatenate"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/H"
+    input: "LSTM/RecurrentInput"
+    output: "LSTM/Concatenate"
+    concatenate_param {
+      axis: 1
+    }
+  }
+  function {
+    name: "LSTM/Affine"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/Affine/affine/W"
+    input: "LSTM/Affine/affine/b"
+    output: "LSTM/Affine"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/IGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/IGate/affine/W"
+    input: "LSTM/IGate/affine/b"
+    output: "LSTM/IGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/FGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/FGate/affine/W"
+    input: "LSTM/FGate/affine/b"
+    output: "LSTM/FGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/OGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/OGate/affine/W"
+    input: "LSTM/OGate/affine/b"
+    output: "LSTM/OGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/Tanh"
+    type: "Tanh"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Affine"
+    output: "LSTM/Tanh"
+  }
+  function {
+    name: "LSTM/Sigmoid"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/IGate"
+    output: "LSTM/Sigmoid"
+  }
+  function {
+    name: "LSTM/Sigmoid_2"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/FGate"
+    output: "LSTM/Sigmoid_2"
+  }
+  function {
+    name: "LSTM/Sigmoid_4"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/OGate"
+    output: "LSTM/Sigmoid_4"
+  }
+  function {
+    name: "LSTM/Mul2"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid"
+    input: "LSTM/Tanh"
+    output: "LSTM/Mul2"
+  }
+  function {
+    name: "LSTM/Mul2_2"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid_2"
+    input: "LSTM/C"
+    output: "LSTM/Mul2_2"
+  }
+  function {
+    name: "LSTM/Add2"
+    type: "Add2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Mul2"
+    input: "LSTM/Mul2_2"
+    output: "LSTM/Add2"
+    add2_param {
+      inplace: True
+    }
+  }
+  function {
+    name: "LSTM/Tanh_2"
+    type: "Tanh"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Add2"
+    output: "LSTM/Tanh_2"
+  }
+  function {
+    name: "LSTM/Mul2_3"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid_4"
+    input: "LSTM/Tanh_2"
+    output: "LSTM/Mul2_3"
+  }
+  function {
+    name: "LSTM/RecurrentOutput"
+    type: "RecurrentOutput"
+    input: "LSTM/Mul2_3"
+    output: "LSTM/RecurrentOutput"
+    recurrent_param {
+      axis: 1
+      repeat_id: "LSTM/RecurrentInput"
+      length: 600
+    }
+  }
+  function {
+    name: "Affine"
+    type: "Affine"
+    input: "LSTM/RecurrentOutput"
+    input: "Affine/affine/W"
+    input: "Affine/affine/b"
+    output: "Affine"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "SquaredError"
+    type: "SquaredError"
+    input: "Affine"
+    input: "SquaredError_T"
+    output: "SquaredError"
+  }
+}
+network {
+  name: "MainValidation"
+  batch_size: 30
+  repeat_info {
+    id: "LSTM/RecurrentInput"
+    times: 600
+  }
+  variable {
+    name: "Input"
+    type: "Buffer"
+    shape: { dim:-1 dim: 600 dim: 2 }
+  }
+  variable {
+    name: "LSTM/C_Initial"
+    type: "Buffer"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/H_Initial"
+    type: "Buffer"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Affine/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/Affine/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/IGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/IGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/FGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/FGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/OGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/OGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "Affine/affine/W"
+    type: "Parameter"
+    shape: { dim: 60000 dim: 1 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "Affine/affine/b"
+    type: "Parameter"
+    shape: { dim: 1 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "SquaredError_T"
+    type: "Buffer"
+    shape: { dim:-1 dim: 1 }
+  }
+  variable {
+    name: "LSTM/RecurrentInput"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 2 }
+  }
+  variable {
+    name: "LSTM/C"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/H"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Concatenate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 102 }
+  }
+  variable {
+    name: "LSTM/Affine"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/IGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/FGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/OGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Tanh"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid_4"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Add2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Tanh_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2_3"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/RecurrentOutput"
+    type: "Buffer"
+    shape: { dim:-1 dim: 600 dim: 100 }
+  }
+  variable {
+    name: "Affine"
+    type: "Buffer"
+    shape: { dim:-1 dim: 1 }
+  }
+  variable {
+    name: "SquaredError"
+    type: "Buffer"
+    shape: { dim:-1 dim: 1 }
+  }
+  function {
+    name: "LSTM/RecurrentInput"
+    type: "RecurrentInput"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "Input"
+    output: "LSTM/RecurrentInput"
+    recurrent_param {
+      axis: 1
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/C"
+    type: "Delay"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Add2"
+    input: "LSTM/C_Initial"
+    output: "LSTM/C"
+    recurrent_param {
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/H"
+    type: "Delay"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Mul2_3"
+    input: "LSTM/H_Initial"
+    output: "LSTM/H"
+    recurrent_param {
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/Concatenate"
+    type: "Concatenate"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/H"
+    input: "LSTM/RecurrentInput"
+    output: "LSTM/Concatenate"
+    concatenate_param {
+      axis: 1
+    }
+  }
+  function {
+    name: "LSTM/Affine"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/Affine/affine/W"
+    input: "LSTM/Affine/affine/b"
+    output: "LSTM/Affine"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/IGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/IGate/affine/W"
+    input: "LSTM/IGate/affine/b"
+    output: "LSTM/IGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/FGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/FGate/affine/W"
+    input: "LSTM/FGate/affine/b"
+    output: "LSTM/FGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/OGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/OGate/affine/W"
+    input: "LSTM/OGate/affine/b"
+    output: "LSTM/OGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/Tanh"
+    type: "Tanh"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Affine"
+    output: "LSTM/Tanh"
+  }
+  function {
+    name: "LSTM/Sigmoid"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/IGate"
+    output: "LSTM/Sigmoid"
+  }
+  function {
+    name: "LSTM/Sigmoid_2"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/FGate"
+    output: "LSTM/Sigmoid_2"
+  }
+  function {
+    name: "LSTM/Sigmoid_4"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/OGate"
+    output: "LSTM/Sigmoid_4"
+  }
+  function {
+    name: "LSTM/Mul2"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid"
+    input: "LSTM/Tanh"
+    output: "LSTM/Mul2"
+  }
+  function {
+    name: "LSTM/Mul2_2"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid_2"
+    input: "LSTM/C"
+    output: "LSTM/Mul2_2"
+  }
+  function {
+    name: "LSTM/Add2"
+    type: "Add2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Mul2"
+    input: "LSTM/Mul2_2"
+    output: "LSTM/Add2"
+    add2_param {
+      inplace: True
+    }
+  }
+  function {
+    name: "LSTM/Tanh_2"
+    type: "Tanh"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Add2"
+    output: "LSTM/Tanh_2"
+  }
+  function {
+    name: "LSTM/Mul2_3"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid_4"
+    input: "LSTM/Tanh_2"
+    output: "LSTM/Mul2_3"
+  }
+  function {
+    name: "LSTM/RecurrentOutput"
+    type: "RecurrentOutput"
+    input: "LSTM/Mul2_3"
+    output: "LSTM/RecurrentOutput"
+    recurrent_param {
+      axis: 1
+      repeat_id: "LSTM/RecurrentInput"
+      length: 600
+    }
+  }
+  function {
+    name: "Affine"
+    type: "Affine"
+    input: "LSTM/RecurrentOutput"
+    input: "Affine/affine/W"
+    input: "Affine/affine/b"
+    output: "Affine"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "SquaredError"
+    type: "SquaredError"
+    input: "Affine"
+    input: "SquaredError_T"
+    output: "SquaredError"
+  }
+}
+network {
+  name: "MainRuntime"
+  batch_size: 30
+  repeat_info {
+    id: "LSTM/RecurrentInput"
+    times: 600
+  }
+  variable {
+    name: "Input"
+    type: "Buffer"
+    shape: { dim:-1 dim: 600 dim: 2 }
+  }
+  variable {
+    name: "LSTM/C_Initial"
+    type: "Buffer"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/H_Initial"
+    type: "Buffer"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Affine/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/Affine/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/IGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/IGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/FGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/FGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/OGate/affine/W"
+    type: "Parameter"
+    shape: { dim: 102 dim: 100 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "LSTM/OGate/affine/b"
+    type: "Parameter"
+    shape: { dim: 100 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "Affine/affine/W"
+    type: "Parameter"
+    shape: { dim: 60000 dim: 1 }
+    initializer {
+      type: "NormalAffineGlorot"
+      multiplier: 1
+    }
+  }
+  variable {
+    name: "Affine/affine/b"
+    type: "Parameter"
+    shape: { dim: 1 }
+    initializer {
+      type: "Constant"
+      multiplier: 0
+    }
+  }
+  variable {
+    name: "LSTM/RecurrentInput"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 2 }
+  }
+  variable {
+    name: "LSTM/C"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/H"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Concatenate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 102 }
+  }
+  variable {
+    name: "LSTM/Affine"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/IGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/FGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/OGate"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Tanh"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Sigmoid_4"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Add2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Tanh_2"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/Mul2_3"
+    type: "Buffer"
+    repeat_id: "LSTM/RecurrentInput"
+    shape: { dim:-1 dim: 100 }
+  }
+  variable {
+    name: "LSTM/RecurrentOutput"
+    type: "Buffer"
+    shape: { dim:-1 dim: 600 dim: 100 }
+  }
+  variable {
+    name: "Affine"
+    type: "Buffer"
+    shape: { dim:-1 dim: 1 }
+  }
+  function {
+    name: "LSTM/RecurrentInput"
+    type: "RecurrentInput"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "Input"
+    output: "LSTM/RecurrentInput"
+    recurrent_param {
+      axis: 1
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/C"
+    type: "Delay"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Add2"
+    input: "LSTM/C_Initial"
+    output: "LSTM/C"
+    recurrent_param {
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/H"
+    type: "Delay"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Mul2_3"
+    input: "LSTM/H_Initial"
+    output: "LSTM/H"
+    recurrent_param {
+      repeat_id: "LSTM/RecurrentInput"
+    }
+  }
+  function {
+    name: "LSTM/Concatenate"
+    type: "Concatenate"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/H"
+    input: "LSTM/RecurrentInput"
+    output: "LSTM/Concatenate"
+    concatenate_param {
+      axis: 1
+    }
+  }
+  function {
+    name: "LSTM/Affine"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/Affine/affine/W"
+    input: "LSTM/Affine/affine/b"
+    output: "LSTM/Affine"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/IGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/IGate/affine/W"
+    input: "LSTM/IGate/affine/b"
+    output: "LSTM/IGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/FGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/FGate/affine/W"
+    input: "LSTM/FGate/affine/b"
+    output: "LSTM/FGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/OGate"
+    type: "Affine"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Concatenate"
+    input: "LSTM/OGate/affine/W"
+    input: "LSTM/OGate/affine/b"
+    output: "LSTM/OGate"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "LSTM/Tanh"
+    type: "Tanh"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Affine"
+    output: "LSTM/Tanh"
+  }
+  function {
+    name: "LSTM/Sigmoid"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/IGate"
+    output: "LSTM/Sigmoid"
+  }
+  function {
+    name: "LSTM/Sigmoid_2"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/FGate"
+    output: "LSTM/Sigmoid_2"
+  }
+  function {
+    name: "LSTM/Sigmoid_4"
+    type: "Sigmoid"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/OGate"
+    output: "LSTM/Sigmoid_4"
+  }
+  function {
+    name: "LSTM/Mul2"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid"
+    input: "LSTM/Tanh"
+    output: "LSTM/Mul2"
+  }
+  function {
+    name: "LSTM/Mul2_2"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid_2"
+    input: "LSTM/C"
+    output: "LSTM/Mul2_2"
+  }
+  function {
+    name: "LSTM/Add2"
+    type: "Add2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Mul2"
+    input: "LSTM/Mul2_2"
+    output: "LSTM/Add2"
+    add2_param {
+      inplace: True
+    }
+  }
+  function {
+    name: "LSTM/Tanh_2"
+    type: "Tanh"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Add2"
+    output: "LSTM/Tanh_2"
+  }
+  function {
+    name: "LSTM/Mul2_3"
+    type: "Mul2"
+    repeat_id: "LSTM/RecurrentInput"
+    input: "LSTM/Sigmoid_4"
+    input: "LSTM/Tanh_2"
+    output: "LSTM/Mul2_3"
+  }
+  function {
+    name: "LSTM/RecurrentOutput"
+    type: "RecurrentOutput"
+    input: "LSTM/Mul2_3"
+    output: "LSTM/RecurrentOutput"
+    recurrent_param {
+      axis: 1
+      repeat_id: "LSTM/RecurrentInput"
+      length: 600
+    }
+  }
+  function {
+    name: "Affine"
+    type: "Affine"
+    input: "LSTM/RecurrentOutput"
+    input: "Affine/affine/W"
+    input: "Affine/affine/b"
+    output: "Affine"
+    affine_param {
+      base_axis: 1
+    }
+  }
+}
+dataset {
+  name: "Training"
+  uri: "D:\\tmp\\ai\\sampleRecursion\\sample2_lstm\\dataset\\tran.csv"
+  cache_dir: "D:\\tmp\\ai\\sampleRecursion\\sample2_lstm\\dataset\\tran.cache"
+  overwrite_cache: true
+  create_cache_explicitly: true
+  shuffle: true
+  no_image_normalization: false
+  batch_size: 30
+}
+dataset {
+  name: "Validation"
+  uri: "D:\\tmp\\ai\\sampleRecursion\\sample2_lstm\\dataset\\test.csv"
+  cache_dir: "D:\\tmp\\ai\\sampleRecursion\\sample2_lstm\\dataset\\test.cache"
+  overwrite_cache: true
+  create_cache_explicitly: true
+  shuffle: false
+  no_image_normalization: false
+  batch_size: 30
+}
+optimizer {
+  start_iter: 0
+  end_iter: 0
+  name: "Optimizer"
+  update_interval: 1
+  network_name: "Main"
+  dataset_name: "Training"
+  solver {
+    type: "Adam"
+    weight_decay: 0
+    adam_param {
+      alpha: 0.001
+      beta1: 0.9
+      beta2: 0.999
+      eps: 1e-08
+    }
+    lr_scheduler_type: "Exponential"
+    exponential_scheduler_param {
+      gamma: 1
+      iter_interval: 6
+    }
+    lr_decay: 1
+    lr_decay_interval: 6
+    lr_warmup_scheduler_type: "None"
+  }
+  data_variable {
+    variable_name: "Input"
+    data_name: "x"
+  }
+  generator_variable {
+    variable_name: "LSTM/C_Initial"
+    type: "Constant"
+    multiplier: 0
+  }
+  generator_variable {
+    variable_name: "LSTM/H_Initial"
+    type: "Constant"
+    multiplier: 0
+  }
+  data_variable {
+    variable_name: "SquaredError_T"
+    data_name: "y"
+  }
+  loss_variable {
+    variable_name: "SquaredError"
+  }
+  parameter_variable {
+    variable_name: "LSTM/Affine/affine/W"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "LSTM/Affine/affine/b"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "LSTM/IGate/affine/W"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "LSTM/IGate/affine/b"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "LSTM/FGate/affine/W"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "LSTM/FGate/affine/b"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "LSTM/OGate/affine/W"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "LSTM/OGate/affine/b"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "Affine/affine/W"
+    learning_rate_multiplier: 1
+  }
+  parameter_variable {
+    variable_name: "Affine/affine/b"
+    learning_rate_multiplier: 1
+  }
+}
+monitor {
+  name: "train_error"
+  network_name: "MainValidation"
+  dataset_name: "Training"
+  data_variable {
+    variable_name: "Input"
+    data_name: "x"
+  }
+  generator_variable {
+    variable_name: "LSTM/C_Initial"
+    type: "Constant"
+    multiplier: 0
+  }
+  generator_variable {
+    variable_name: "LSTM/H_Initial"
+    type: "Constant"
+    multiplier: 0
+  }
+  data_variable {
+    variable_name: "SquaredError_T"
+    data_name: "y"
+  }
+  monitor_variable {
+    type: "Error"
+    variable_name: "SquaredError"
+  }
+}
+monitor {
+  name: "valid_error"
+  network_name: "MainValidation"
+  dataset_name: "Validation"
+  data_variable {
+    variable_name: "Input"
+    data_name: "x"
+  }
+  generator_variable {
+    variable_name: "LSTM/C_Initial"
+    type: "Constant"
+    multiplier: 0
+  }
+  generator_variable {
+    variable_name: "LSTM/H_Initial"
+    type: "Constant"
+    multiplier: 0
+  }
+  data_variable {
+    variable_name: "SquaredError_T"
+    data_name: "y"
+  }
+  monitor_variable {
+    type: "Error"
+    variable_name: "SquaredError"
+  }
+}
+executor {
+  name: "Executor"
+  network_name: "MainRuntime"
+  num_evaluations: 1
+  repeat_evaluation_type: "mean"
+  need_back_propagation: false
+  no_image_normalization: false
+  data_variable {
+    variable_name: "Input"
+    data_name: "x"
+  }
+  generator_variable {
+    variable_name: "LSTM/C_Initial"
+    type: "Constant"
+    multiplier: 0
+  }
+  generator_variable {
+    variable_name: "LSTM/H_Initial"
+    type: "Constant"
+    multiplier: 0
+  }
+  output_variable {
+    variable_name: "Affine"
+    data_name: "y'"
+  }
+  parameter_variable {
+    variable_name: "LSTM/Affine/affine/W"
+  }
+  parameter_variable {
+    variable_name: "LSTM/Affine/affine/b"
+  }
+  parameter_variable {
+    variable_name: "LSTM/IGate/affine/W"
+  }
+  parameter_variable {
+    variable_name: "LSTM/IGate/affine/b"
+  }
+  parameter_variable {
+    variable_name: "LSTM/FGate/affine/W"
+  }
+  parameter_variable {
+    variable_name: "LSTM/FGate/affine/b"
+  }
+  parameter_variable {
+    variable_name: "LSTM/OGate/affine/W"
+  }
+  parameter_variable {
+    variable_name: "LSTM/OGate/affine/b"
+  }
+  parameter_variable {
+    variable_name: "Affine/affine/W"
+  }
+  parameter_variable {
+    variable_name: "Affine/affine/b"
+  }
+}
